@@ -2,20 +2,35 @@
 import csv
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
-    def __init__(self,name): 
+    def __init__(self,name,items,readers): 
         self.name=name
-        self.items={}
-        self.readers={}
+        self.items=items
+        self.readers=readers
 
     def add_item(self,item):
         pass
 
-    def get_items(): # вроде так
+    def __str__(self):
         pass
-
-
-
-
+    
+    def get_items(self): # вроде так
+        pass
+    
+    def book(self):
+        pass
+    
+    def magazine(self):
+        pass
+    
+    def newspaper(self):
+        pass
+    
+    @property #по сути это надо так же написать над функциями товара, но я неуверен
+    def user(self):
+        pass
+    
+    def popularity(self):
+        pass
 
 
 
@@ -53,3 +68,5 @@ while True:
             pass #top 10 popular
         else:
             print("viga! tegevus 0..8")
+
+
