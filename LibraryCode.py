@@ -68,40 +68,91 @@ class loan:
     def loan(self, )
 
 #test
-while True: #временное да короче
-    print("!!!Raamatukogu!!!")
+while True: #возможно поменяем меню
     print("1-Lisa raamatukogu")
-    print("2-Lisa lugeja")
-    print("3-Registreeri lugeja raamatukogus")
-    print("4-Lisa objekt raamatukokku")
-    print("5-Laena objekt")
-    print("6-Tagasta objekt")
-    print("7- Näita kõiki objekte")
-    print("8-Näita 10 populaarsemat objekti")
     print("0-lopetab too")
     tegevus=int(input("sissesta tegevuse number nr: "))
     if tegevus==0:
         break
     else:
         if tegevus==1:
-            pass # create library  
-        elif tegevus==2:
-            pass # add reader
-        elif tegevus==3:
-            pass #register reader in library
-        elif tegevus==4:
-            pass # add item
-        elif tegevus==5:
-            pass #borrow item
-        elif tegevus==6:
-            pass #return item
-        elif tegevus==7:
-            pass #show items
-        elif tegevus==8:
-            pass #top 10 popular
-        else:
-            print("viga! tegevus 0..8")
+            raamatu=input("Kirjuta raamatukogu nimi: ")
+            while True: 
+                print("!!!Raamatukogu!!!")
+                print("1-Lisa raamatukogu")
+                print("2-Регистрируем Человека")
+                print("3-Выдать предмед")
+                print("4-Добавить предмед в библеотеку")
+                print("5-")
+                print("6-Человек зарегистрировался как читатель")
+                print("7-")
+                print("8-")
+                print("5-")
+                print("5-")
+                print("5-")
+                print("0-lopetab too")
+                tegevus=int(input("sissesta tegevuse number nr: "))
+                if tegevus==0:
+                    break
+                else:
+                    if tegevus==1:
+                        pass
+                    elif tegevus==2:
+                        pass
+                    elif tegevus==3:
+                        while True:
+                            print("1-Raamat")
+                            print("2-Tarkvara")
+                            print("3-DVD")
+                            print("0-lopetab too")
+                            tegevus=int(input("sissesta tegevuse number nr: "))
+                            if tegevus==0:
+                                break
+                            else:
+                                if tegevus==1: #выдаем книгу
+                                    pass
+                                elif tegevus==2: #выдаем по
+                                    pass
+                                elif tegevus==3: #выдаем двд
+                                    pass
+                    elif tegevus==4:
+                        while True:
+                            print("1-Raamat")
+                            print("2-Tarkvara")
+                            print("3-DVD")
+                            print("0-lopetab too")
+                            tegevus=int(input("sissesta tegevuse number nr: "))
+                            if tegevus==0:
+                                break
+                            else:
+                                if tegevus==1: #добавление книги
+                                    pass
+                                elif tegevus==2: #добавление по
+                                    pass
+                                elif tegevus==3: #добавление двд
+                                    pass
+                    elif tegevus==5:
+                        while True:
+                            print("1-Laena objekt") # взять объект
+                            print("2-Tagasta objekt") # вернуть объект
+                            print("3-Näita kõiki objekte") # показать все объекты
+                            print("0-lopetab too")
+                            tegevus=int(input("sissesta tegevuse number nr: "))
+                            if tegevus==0:
+                                break
+                            else:
+                                if tegevus2==1: # тут пишем какой объект мы хотим взять
+                                    pass
+                                elif tegevus2==2: # тут пишем какой объект мы хотим вернуть
+                                    pass
+                                elif tegevus2==3: # тут показываем все объекты
+                                    pass
+                    elif tegevus==6:
+                        pass
+                    elif tegevus==7:
+                        pass
+                    elif tegevus==8:
+                        pass
+                    else:
+                        print("viga! tegevus 0..8")
 
-
-
-libr1 = Book(12,5,7)
