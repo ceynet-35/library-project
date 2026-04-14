@@ -53,11 +53,11 @@ class book:
         return self.amountC         # не уверен .насчёт этого всего, сори, если написал хуйни хывхывхыв  :>
 
 class magazine:
-    def magazine(self, amount):
+    def __init__(self, amount):
         self.amount = amount
         
 class newspaper:
-    def newspaper(self, amount):
+    def __init__(self, amount):
         self.amount = amount
 
 class loan:
