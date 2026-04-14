@@ -32,9 +32,36 @@ class Library: #это как одна библеотека я немного н
     def popularity(self):
         pass
     
-    def penis(self):
-        pass
+class LibraryItem:
+    def __init__(self, title):
+        self.title = title
 
+class book:
+    def __init__(self, amount, amountA, amountB, amountC):  # не уверен ,что эт так работает, но вообщем идея amountA/B/C в том, что всего есть 3 разных книг и у каждой своё колво, тоесть у первой книги колвоА, у второй колвоВ, типо такое
+        self.amount = amount
+        self.amountA = a
+        self.amountB = b
+        self.amountC = c
+    
+    def harrypotter(self):
+        return self.amountA
+
+    def chototam(self):
+        return self.amountB
+
+    def bebebe(self):
+        return self.amountC         # не уверен .насчёт этого всего, сори, если написал хуйни хывхывхыв  :>
+
+class magazine:
+    def magazine(self, amount):
+        self.amount = amount
+        
+class newspaper:
+    def newspaper(self, amount):
+        self.amount = amount
+
+class loan:
+    def loan(self, )
 
 #test
 while True:
@@ -72,3 +99,5 @@ while True:
             print("viga! tegevus 0..8")
 
 
+
+libr1 = book(12,5,7)
