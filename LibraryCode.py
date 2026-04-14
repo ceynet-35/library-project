@@ -74,7 +74,7 @@ class loan:
     def loan(self, )
 
 #test
-while True:
+while True: #временное да короче
     print("!!!Raamatukogu!!!")
     print("1-Lisa raamatukogu")
     print("2-Lisa lugeja")
