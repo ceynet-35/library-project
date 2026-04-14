@@ -36,7 +36,7 @@ class LibraryItem:
     def __init__(self, title):
         self.title = title
 
-class book:
+class Book:
     def __init__(self, amount, amountA, amountB, amountC):  # не уверен ,что эт так работает, но вообщем идея amountA/B/C в том, что всего есть 3 разных книг и у каждой своё колво, тоесть у первой книги колвоА, у второй колвоВ, типо такое
         self.amount = amount
         self.amountA = a
@@ -100,4 +100,4 @@ while True:
 
 
 
-libr1 = book(12,5,7)
+libr1 = Book(12,5,7)
