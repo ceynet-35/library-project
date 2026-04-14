@@ -9,10 +9,10 @@ class Item:
 
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
-    def __init__(self,name,items,readers): 
+    def __init__(self,name,items,user): 
         self.name=name
         self.items={}
-        self.readers={}
+        self.user={}
 
     def add_item(self,item):
         pass
@@ -34,13 +34,7 @@ class Library: #это как одна библеотека я немного н
     
     def registation(self):
         pass
-    
-    @property #по сути это надо так же написать над функциями товара, но я неуверен
-    def user(self):
-        pass
-    
-    def popularity(self):
-        pass
+
     
 class LibraryItem(Library):
     def __init__(self, title):
