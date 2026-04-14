@@ -1,11 +1,18 @@
 #import
 import csv
 
+class Item:
+    def __init__(self,item_id,title):
+        self.item_id=item_id
+        self.title=title
+        self.popularity=0
+
+
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
     def __init__(self,name,items,readers): 
         self.name=name
-        self.items=items
-        self.readers=readers
+        self.items={}
+        self.readers={}
 
     def add_item(self,item):
         pass
