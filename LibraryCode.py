@@ -31,7 +31,9 @@ class Library: #это как одна библеотека я немного н
     
     def popularity(self):
         pass
-
+    
+    def penis(self):
+        pass
 
 
 #test
