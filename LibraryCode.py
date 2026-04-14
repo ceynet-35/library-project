@@ -79,17 +79,17 @@ while True: #возможно поменяем меню
             raamatu=input("Kirjuta raamatukogu nimi: ")
             while True: 
                 print("!!!Raamatukogu!!!")
-                print("1-Lisa raamatukogu")
-                print("2-Регистрируем Человека")
+                print("1-Регистрируем Человека")
+                print("2-Вернуть предмед")
                 print("3-Выдать предмед")
                 print("4-Добавить предмед в библеотеку")
-                print("5-")
-                print("6-Человек зарегистрировался как читатель")
-                print("7-")
+                print("5-люди регистрируются как читатели")
+                print("6-")
+                print("7-данные")
                 print("8-")
-                print("5-")
-                print("5-")
-                print("5-")
+                print("9-проверяется регистрация одного человека в нескольких библиотеках")
+                print("10-отображаются самые популярные объекты библиотек")
+                print("11-Lisa raamatukogu")
                 print("0-lopetab too")
                 tegevus=int(input("sissesta tegevuse number nr: "))
                 if tegevus==0:
@@ -98,7 +98,21 @@ while True: #возможно поменяем меню
                     if tegevus==1:
                         pass
                     elif tegevus==2:
-                        pass
+                        while True:
+                            print("1-Raamat")
+                            print("2-Tarkvara")
+                            print("3-DVD")
+                            print("0-lopetab too")
+                            tegevus=int(input("sissesta tegevuse number nr: "))
+                            if tegevus==0:
+                                break
+                            else:
+                                if tegevus==1: #выдаем книгу
+                                    pass
+                                elif tegevus==2: #выдаем по
+                                    pass
+                                elif tegevus==3: #выдаем двд
+                                    pass
                     elif tegevus==3:
                         while True:
                             print("1-Raamat")
@@ -132,25 +146,26 @@ while True: #возможно поменяем меню
                                 elif tegevus==3: #добавление двд
                                     pass
                     elif tegevus==5:
+                        pass
+                    elif tegevus==6:
+                        pass
+                    elif tegevus==7:
                         while True:
-                            print("1-Laena objekt") # взять объект
-                            print("2-Tagasta objekt") # вернуть объект
-                            print("3-Näita kõiki objekte") # показать все объекты
+                            print("1-все книги в наличии")
+                            print("2-читатели в библиотеке на данный момент")
+                            print("3-показать профиль пользователей")
+                            print("4-штрафы")
                             print("0-lopetab too")
                             tegevus=int(input("sissesta tegevuse number nr: "))
                             if tegevus==0:
                                 break
                             else:
-                                if tegevus2==1: # тут пишем какой объект мы хотим взять
+                                if tegevus==1: #csv файле все
                                     pass
-                                elif tegevus2==2: # тут пишем какой объект мы хотим вернуть
+                                elif tegevus==2: #добавление по
                                     pass
-                                elif tegevus2==3: # тут показываем все объекты
+                                elif tegevus==3: #добавление двд
                                     pass
-                    elif tegevus==6:
-                        pass
-                    elif tegevus==7:
-                        pass
                     elif tegevus==8:
                         pass
                     else:
