@@ -25,6 +25,9 @@ class Library: #это как одна библеотека я немного н
     def newspaper(self):
         pass
     
+    def registation(self):
+        pass
+    
     @property #по сути это надо так же написать над функциями товара, но я неуверен
     def user(self):
         pass
@@ -32,11 +35,11 @@ class Library: #это как одна библеотека я немного н
     def popularity(self):
         pass
     
-class LibraryItem:
+class LibraryItem(Library):
     def __init__(self, title):
         self.title = title
 
-class Book:
+class Book(Library):
     def __init__(self, amount, amountA, amountB, amountC):  # не уверен ,что эт так работает, но вообщем идея amountA/B/C в том, что всего есть 3 разных книг и у каждой своё колво, тоесть у первой книги колвоА, у второй колвоВ, типо такое
         self.amount = amount
         self.amountA = a
@@ -44,13 +47,13 @@ class Book:
         self.amountC = c
     
     def harrypotter(self):
-        return self.amountA
+        return f"book: {self.amountA}"
 
     def chototam(self):
-        return self.amountB
+        return f"book: {self.amountB}"
 
     def bebebe(self):
-        return self.amountC         # не уверен .насчёт этого всего, сори, если написал хуйни хывхывхыв  :>
+        return f"book: {self.amountC}"         # не уверен .насчёт этого всего, сори, если написал хуйни хывхывхыв  :>
 
 class magazine:
     def __init__(self, amount):
