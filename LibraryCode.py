@@ -48,7 +48,7 @@ while True: #возможно поменяем меню
     else:
         if tegevus==1:
             raamatu=input("Kirjuta raamatukogu nimi: ")
-            while True: 
+            while True: #потом доработаем и сделаем граматно
                 print("!!!Raamatukogu!!!")
                 print("1-Регистрируем Человека")
                 print("2-Вернуть предмед")
