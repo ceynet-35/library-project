@@ -16,18 +16,18 @@ class Item:
 class Book(Item):
     def __init__(self, item_id, title, day_arent=14):
         super().__init__(item_id, title)
-        self.day_arent = day_arent
-        self.trahv_paevast=0.06
+        self.day_arent = day_arent    # сколько дней можно держать книгу
+        self.trahv_paevast=0.06       # штраф за каждый просроченный день
 
 class DVD(Item):
     def __init__(self, item_id, title, day_arent=14):
         super().__init__(item_id, title)
-        self.day_arent = day_arent
-        self.trahv_paevast=0.06
+        self.day_arent = day_arent   # сколько дней можно держать диск
+        self.trahv_paevast=0.06      # штраф за каждый просроченный день
 
 class Tarkvara(Item):
-    def __init__(self, item_id, title):
-        super().__init__(item_id, title)
+    def __init__(self, item_id, title): 
+        super().__init__(item_id, title) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"
 
 class Person:
     
