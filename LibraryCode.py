@@ -7,11 +7,11 @@ from datetime import datetime
 
 class Item:
     def __init__(self,item_id,title,amount=1):
-        self.item_id=item_id
-        self.title=title
-        self.popularity=0
-        self.amount=amount          # всего экземпляров
-        self.available=amount       # доступные экземпляры
+        self.item_id=item_id # уникальный айди объекта(книги,двд,тарквара)
+        self.title=title     # название объекта
+        self.popularity=0    # популярность объекта (будет увиличиваться когда предмед будут брать пример 7.5./10)
+        self.amount=amount         # сколько всего экземпляров в библеотеке
+        self.available=amount      # сколько сейчас доступно для выдачи
 
 class Book(Item):
     def __init__(self, item_id, title, day_arent=14):
