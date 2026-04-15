@@ -2,10 +2,12 @@
 import csv # сделаем логику а потом уже добавим работу с csv файлами
 
 class Item:
-    def __init__(self,item_id,title):
+    def __init__(self,item_id,title,amount=1):
         self.item_id=item_id
         self.title=title
         self.popularity=0
+        self.amount=amount          # всего экземпляров
+        self.available=amount       # доступные экземпляры
 
 class Book(Item):
     def __init__(self, item_id, title, day_arent=14):
@@ -20,11 +22,11 @@ class DVD(Item):
         self.trahv_paevast=0.06
 
 class Tarkvara(Item):
-    def __init__(self, item_id, title, day_arent=14):
+    def __init__(self, item_id, title):
         super().__init__(item_id, title)
-        self.day_arent = day_arent
-        self.trahv_paevast=0.06
 
+class Person:
+    
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
     def __init__(self,name,items,user): 
