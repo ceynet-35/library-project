@@ -16,57 +16,10 @@ class Library: #это как одна библеотека я немного н
 
     def add_item(self,item):
         pass
-
-    def __str__(self):
-        pass
     
     def get_items(self): # вроде так
         pass
     
-    def book(self):
-        pass
-    
-    def magazine(self):
-        pass
-    
-    def newspaper(self):
-        pass
-    
-    def registation(self):
-        pass
-
-    
-class LibraryItem(Library):
-    def __init__(self, title):
-        self.title = title
-
-class Book(Library):
-    def __init__(self, amount, amountA, amountB, amountC):  # не уверен ,что эт так работает, но вообщем идея amountA/B/C в том, что всего есть 3 разных книг и у каждой своё колво, тоесть у первой книги колвоА, у второй колвоВ, типо такое
-        self.amount = amount
-        self.amountA = a
-        self.amountB = b
-        self.amountC = c
-    
-    def harrypotter(self):
-        return f"book: {self.amountA}"
-
-    def chototam(self):
-        return f"book: {self.amountB}"
-
-    def bebebe(self):
-        return f"book: {self.amountC}"         # не уверен .насчёт этого всего, сори, если написал хуйни хывхывхыв  :>
-
-class magazine:
-    def __init__(self, amount):
-        self.amount = amount
-        
-class newspaper:
-    def __init__(self, amount):
-        self.amount = amount
-
-class loan:
-    def loan(self, )
-
 #test
 while True: #возможно поменяем меню
     print("1-Lisa raamatukogu")
