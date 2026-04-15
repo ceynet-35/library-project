@@ -1,5 +1,9 @@
 #import
 import csv # сделаем логику а потом уже добавим работу с csv файлами
+from datetime import datetime
+
+
+
 
 class Item:
     def __init__(self,item_id,title,amount=1):
