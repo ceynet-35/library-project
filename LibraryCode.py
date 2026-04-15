@@ -7,6 +7,24 @@ class Item:
         self.title=title
         self.popularity=0
 
+class Book(Item):
+    def __init__(self, item_id, title, day_arent=14):
+        super().__init__(item_id, title)
+        self.day_arent = day_arent
+        self.trahv_paevast=0.06
+
+class DVD(Item):
+    def __init__(self, item_id, title, day_arent=14):
+        super().__init__(item_id, title)
+        self.day_arent = day_arent
+        self.trahv_paevast=0.06
+
+class Tarkvara(Item):
+    def __init__(self, item_id, title, day_arent=14):
+        super().__init__(item_id, title)
+        self.day_arent = day_arent
+        self.trahv_paevast=0.06
+
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
     def __init__(self,name,items,user): 
