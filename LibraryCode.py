@@ -1,5 +1,5 @@
 #import
-import csv
+import csv # сделаем логику а потом уже добавим работу с csv файлами
 
 class Item:
     def __init__(self,item_id,title):
