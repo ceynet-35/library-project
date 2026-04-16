@@ -7,6 +7,7 @@ from datetime import datetime
 
 class Item:
     def __init__(self,item_id,title,amount=1):
+        self.countt = [] #список предметов
         self.item_id=item_id # уникальный айди объекта(книги,двд,тарквара)
         self.title=title     # название объекта
         self.popularity=0    # популярность объекта (будет увиличиваться когда предмед будут брать пример 7.5./10)
@@ -30,12 +31,13 @@ class Tarkvara(Item):
         super().__init__(item_id, title) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"
 
 class Person:
-    def __init__(self,name):
-    self.name=name
-    self.libraries={} # в каких библиотеках зареган
-    self.rentals={}   # текуцие выдачи ()
-    self.fines=0      # общий штраф
-    #дальше тут будут функции
+    def __init__(self,name,person_id):
+        self.person_id = person_id
+        self.name=name
+        self.libraries={} # в каких библиотеках зареган
+        self.rentals={}   # текуцие выдачи ()
+        self.fines=0      # общий штраф
+        #дальше тут будут функции
     
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
@@ -44,11 +46,14 @@ class Library: #это как одна библеотека я немного н
         self.items={}
         self.user={}
 
-    def add_item(self,item):
-        pass
+    def add_item(self,item): #добавляет предмет в библиотеку
+        self.items[item.item_id] = item
     
     def get_items(self): # вроде так
         pass
+    
+    def add_person(self,person): #добавляет пользователя в библиотеку
+        self.user[person.person_id] = person    
     
 #test
 while True: #возможно поменяем меню
