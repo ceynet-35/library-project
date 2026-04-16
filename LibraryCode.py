@@ -14,14 +14,14 @@ class Item:
         self.available=amount      # сколько сейчас доступно для выдачи 
 
 class Book(Item):
-    def __init__(self, item_id, title, day_arent=14):
-        super().__init__(item_id, title)
+    def __init__(self, item_id, title, day_arent=14, amount=1):
+        super().__init__(item_id, title, amount)
         self.day_arent = day_arent    # сколько дней можно держать книгу
         self.trahv_paevast=0.06       # штраф за каждый просроченный день
 
 class DVD(Item):
-    def __init__(self, item_id, title, day_arent=14):
-        super().__init__(item_id, title)
+    def __init__(self, item_id, title, day_arent=14, amount=1):
+        super().__init__(item_id, title, amount)
         self.day_arent = day_arent   # сколько дней можно держать диск
         self.trahv_paevast=0.06      # штраф за каждый просроченный день
 
@@ -30,6 +30,12 @@ class Tarkvara(Item):
         super().__init__(item_id, title) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"
 
 class Person:
+    def __init__(self,name):
+    self.name=name
+    self.libraries={} # в каких библиотеках зареган
+    self.rentals={}   # текуцие выдачи ()
+    self.fines=0      # общий штраф
+    #дальше тут будут функции
     
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
