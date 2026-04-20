@@ -33,12 +33,22 @@ class Tarkvara(Item):
 class Person:
     def __init__(self,name,person_id):
         self.person_id = person_id
-        self.name=name
+        self.name=name   #имя человека
         self.libraries={} # в каких библиотеках зареган
         self.rentals={}   # текуцие выдачи ()
         self.fines=0      # общий штраф
         #дальше тут будут функции
-    
+    def register(self,library):
+        # тут проверяеться зарегана ли библиотека среди других библиотек
+        if library.name in self.libraries:  # library.name - название библиотеки которой хотим зарегаться.  self.libraries - список библиотек в которых зареган
+            print(f"{self.name} уже зарегистрирован в  {library.name}")
+            return # else не используем потому что ретурн уже останавливает метод
+        self.libraries[library.name]=library
+        library.members[self.name]=self
+        print("зарегистрирован")
+        
+        
+
 
 class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
     def __init__(self,name,items,user): 
