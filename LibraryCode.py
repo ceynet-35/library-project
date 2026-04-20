@@ -38,7 +38,7 @@ class Person:
         self.rentals={}   # текуцие выдачи ()
         self.fines=0      # общий штраф
         #дальше тут будут функции
-    def register(self,library):
+    def register(self,library): # регистрируемся в библиотеке
         # тут проверяеться зарегана ли библиотека среди других библиотек
         if library.name in self.libraries:  # library.name - название библиотеки которой хотим зарегаться.  self.libraries - список библиотек в которых зареган
             print(f"{self.name} уже зарегистрирован в  {library.name}")
