@@ -53,7 +53,19 @@ class Person:
             print("Не зарегестрирован")
             return
 
+        if item_id not in library.items:
+            print("такого обьекта нет")
+            return
+        
+        item = library.items[item.id]
 
+        if isinstance(item, Tarkvara) and item_id in self.rentals:
+            print("ПО уже взято!")
+            return
+        
+        if not isinstance(item, Tarkvara) and item.available <= 0:
+            print("Все экземпляры выданы")
+            return
 
 
 class Library: #библиотека
