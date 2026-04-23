@@ -50,7 +50,7 @@ class Person:
         
 
 
-class Library: #это как одна библеотека я немного не понимаю как понять несколько библеотек
+class Library: #библиотека
     def __init__(self,name,items,user): 
         self.name=name
         self.items={}
@@ -59,8 +59,8 @@ class Library: #это как одна библеотека я немного н
     def add_item(self,item): #добавляет предмет в библиотеку
         self.items[item.item_id] = item
     
-    def get_items(self): # вроде так
-        pass
+    def get_items(self,item): # передать пользователю предмет
+        self.rentals[item.item_id] = item
     
     def add_person(self,person): #добавляет пользователя в библиотеку
         self.user[person.person_id] = person    
@@ -75,7 +75,7 @@ while True: #возможно поменяем меню
     else:
         if tegevus==1:
             raamatu=input("Kirjuta raamatukogu nimi: ")
-            while True: #потом доработаем и сделаем граматно
+            while True: #потом доработаем и сделаем грамотно
                 print("!!!Raamatukogu!!!")
                 print("1-Регистрируем Человека")
                 print("2-Вернуть предмед")
@@ -168,4 +168,3 @@ while True: #возможно поменяем меню
                         pass
                     else:
                         print("viga! tegevus 0..8")
-
