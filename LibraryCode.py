@@ -49,27 +49,27 @@ class Person:
         
     def take_item(self, library, item_id):
 
-        if library.name not in self.libraries:
+        if library.name not in self.libraries:    # если предмет не зарегестрирован, то не получится взять предмет (по идеи)
             print("Не зарегестрирован")
             return
 
-        if item_id not in library.items:
+        if item_id not in library.items:    # если обьекта нет в списке, то выводится следующее:
             print("такого обьекта нет")
             return
         
         item = library.items[item.id]
 
-        if isinstance(item, Tarkvara) and item_id in self.rentals:
+        if isinstance(item, Tarkvara) and item_id in self.rentals:   # если по и его айди уже есть в приобретениях, то повторного получить его уже не получится у будет выведено следующее:
             print("ПО уже взято!")
             return
         
-        if not isinstance(item, Tarkvara) and item.available <= 0:
+        if not isinstance(item, Tarkvara) and item.available <= 0:   #  если предмет больше не доступен в библиотеке, то выдаёт следующее:
             print("Все экземпляры выданы")
             return
 
 
 class Library: #библиотека
-    def __init__(self,name,items,user): 
+    def __init__(self,name,items,user):
         self.name=name
         self.items={}
         self.user={}
