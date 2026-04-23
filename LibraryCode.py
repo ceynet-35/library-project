@@ -28,7 +28,7 @@ class DVD(Item):
 
 class Tarkvara(Item):
     def __init__(self, item_id, title): 
-        super().__init__(item_id, title) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"
+        super().__init__(item_id, title, amount=float("inf")) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"  # "inf" = колво бесконечно, так как по не берут, а скачивают.
 
 class Person:
     def __init__(self,name,person_id):
@@ -46,17 +46,14 @@ class Person:
         self.libraries[library.name]=library # например Вася записывает библиотеку в свой список библиотек -> self.libraries = {"Центральная": lib1} КОРОТКО: прощее говоря мы кладём объект в словарь.
         library.members[self.name]=self #Библиотека записывает Васю в свой список читателей -> # library.members = {"Вася": vasya} КОРОТКО: прощее говоря мы кладём объект в словарь.
         print("зарегистрирован")
-
-    def fines_pay(self): #функция оплаты штрафов
-        if self.fines == 0:
-            return "У вас нету штрафов"
-        else:
-            pass # пока в раздумьях как сделать оплату штрафов
         
+    def take_item(self, library, item_id):
+
+        if library.name not in self.libraries:
+            print("Не зарегестрирован")
+            return
 
 
-        
-        
 
 
 class Library: #библиотека
