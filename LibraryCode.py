@@ -32,7 +32,7 @@ class Tarkvara(Item):
 
 class Person:
     def __init__(self,name,person_id):
-        self.person_id = person_id
+        self.person_id = person_id # айди человека
         self.name=name   #имя человека
         self.libraries={} # в каких библиотеках зареган
         self.rentals={}   # текуцие выдачи ()
