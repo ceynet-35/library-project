@@ -12,7 +12,10 @@ class Item:
         self.title=title     # название объекта
         self.popularity=0    # популярность объекта (будет увиличиваться когда предмед будут брать пример 7.5./10)
         self.amount=amount         # сколько всего экземпляров в библеотеке
-        self.available=amount      # сколько сейчас доступно для выдачи 
+        self.available=amount
+        # сколько доступно прямо сейчас — меняется
+        # когда берут: available -= 1
+        # когда возвращают: available += 1
 
 class Book(Item):
     def __init__(self, item_id, title, day_arent=14, amount=1):
