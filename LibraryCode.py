@@ -72,7 +72,7 @@ class Person:
 
 
 class Library: #библиотека
-    def __init__(self,name,items,user):
+    def __init__(self,name):
         self.name=name
         self.items={}
         self.user={}
@@ -84,7 +84,14 @@ class Library: #библиотека
         self.rentals[item.item_id] = item
     
     def add_person(self,person): #добавляет пользователя в библиотеку
-        self.user[person.person_id] = person    
+        self.user[person.person_id] = person 
+
+    def return_item(self,item): #пользователь возвращает  предмет в библиотеку
+        if item.id not in person.rentals:
+            print("you dont  have this item")
+        else:
+            item = self.items[item_id]    
+        
     
 #test
 while True: #возможно поменяем меню
