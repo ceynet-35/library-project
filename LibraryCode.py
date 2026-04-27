@@ -70,6 +70,46 @@ class Person:
             print("Все экземпляры выданы")
             return
 
+        item.popularity += 1  # увеличиваем популярность предмета на 1
+        
+        if not isinstance(item, Tarkvara):  # если это НЕ программное обеспечение
+            item.available -= 1  # уменьшаем количество доступных экземпляров
+            due_date = datetime.now() + timedelta(days=item.day_arent)  # считаем дату возврата
+        else:  # если это ПО
+            due_date = None  # у ПО нет срока возврата
+        
+        self.rentals[item_id] = (item, due_date)  # сохраняем, что пользователь взял предмет
+        library.rentals.append((self, item))  # добавляем запись о выдаче в библиотеку
+        
+        print(f"{self.name} взял {item.title}")  # выводим сообщение о взятии
+        
+        
+        # ВОЗВРАТ
+        def return_item(self, library, item_id):  # функция возврата предмета
+        
+            if item_id not in self.rentals:  # если пользователь не брал этот предмет
+                print("Ты не брал это")  # сообщение об ошибке
+                return  # выходим из функции
+        
+            item, due_date = self.rentals[item_id]  # получаем предмет и дату возврата
+        
+            if isinstance(item, Tarkvara):  # если это ПО
+                print("ПО возвращать не нужно")  # сообщаем, что возврат не нужен
+                return  # выходим
+        
+            today = datetime.now()  # получаем текущую дату
+        
+            if today > due_date:  # если просрочили
+                days = (today - due_date).days  # считаем количество дней просрочки
+                fine = days * item.trahv_paevast  # считаем штраф
+                self.fines += fine  # добавляем штраф пользователю
+                library.fines.append(fine)  # записываем штраф в библиотеку
+                print(f"Штраф: {fine:.2f} €")  # выводим штраф
+        
+            item.available += 1  # увеличиваем количество доступных экземпляров
+            del self.rentals[item_id]  # удаляем предмет из списка взятых
+        
+            print(f"{self.name} вернул {item.title}")  # сообщение о возврате
 
 class Library: #библиотека
     def __init__(self,name):
