@@ -1,55 +1,61 @@
 #import
 import csv # сделаем логику а потом уже добавим работу с csv файлами
-from datetime import datetime
+from datetime import datetime #
 
 
 
-
-class Item:
-    def __init__(self,item_id,title,amount=1):
-        self.countt = [] #список предметов
+class Item: #КЛАСС ITEM ГОТОВЫЙ ЕГО НЕ ТРОГАТЬ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def __init__(self, item_id, title, amount=1):
         self.item_id=item_id # уникальный айди объекта(книги,двд,тарквара)
         self.title=title     # название объекта
         self.popularity=0    # популярность объекта (будет увиличиваться когда предмед будут брать пример 7.5./10)
         self.amount=amount         # сколько всего экземпляров в библеотеке
-        self.available=amount
+        self.available=amount #чуть ниже рассписанно
+        # тут
         # сколько доступно прямо сейчас — меняется
         # когда берут: available -= 1
         # когда возвращают: available += 1
 
 class Book(Item):
-    def __init__(self, item_id, title, day_arent=14, amount=1):
-        super().__init__(item_id, title, amount)
+    def __init__(self, item_id, title, amount=1, day_rent=14):
+        super().__init__(item_id, title, amount) # передаём данные в Item
         self.day_arent = day_arent    # сколько дней можно держать книгу
         self.trahv_paevast=0.06       # штраф за каждый просроченный день
 
 class DVD(Item):
-    def __init__(self, item_id, title, day_arent=14, amount=1):
+    def __init__(self, item_id, title, amount=1, day_rent=7):
         super().__init__(item_id, title, amount)
         self.day_arent = day_arent   # сколько дней можно держать диск
         self.trahv_paevast=0.06      # штраф за каждый просроченный день
 
 class Tarkvara(Item):
     def __init__(self, item_id, title): 
-        super().__init__(item_id, title, amount=float("inf")) # по не имеет штрафов и не возвращаеться по этому нам не нужны "self.day_arent" и "self.trahv_paevast"  # "inf" = колво бесконечно, так как по не берут, а скачивают.
+        super().__init__(item_id, title) # ПО — нет срока и штрафов, можно выдавать сколько угодно раз
+
 
 class Person:
-    def __init__(self,name,person_id):
+    def __init__(self,name,person_id): # КОНСТРУКТОР ГОТОВЫЙ ЕГО НЕ ТРОГАТЬ!!!
         self.person_id = person_id # айди человека
         self.name=name   #имя человека
         self.libraries={} # в каких библиотеках зареган
         self.rentals={}   # текуцие выдачи ()
         self.fines=0      # общий штраф
-        #дальше тут будут функции
-    def register(self,library): # регистрируемся в библиотеке
+        
+    # РЕГИСТРАЦИЯ ГОТОВА ЕЕ НЕ ТРОГАТЬ!!!!
+    def register(self,library): # регистрируемся в библиотеке 
         # тут проверяеться зарегана ли библиотека среди других библиотек
         if library.name in self.libraries:  # library.name - название библиотеки которой хотим зарегаться.  self.libraries - список библиотек в которых зареган
             print(f"{self.name} уже зарегистрирован в  {library.name}")
             return # else не используем потому что ретурн уже останавливает метод
         self.libraries[library.name]=library # например Вася записывает библиотеку в свой список библиотек -> self.libraries = {"Центральная": lib1} КОРОТКО: прощее говоря мы кладём объект в словарь.
         library.members[self.name]=self #Библиотека записывает Васю в свой список читателей -> # library.members = {"Вася": vasya} КОРОТКО: прощее говоря мы кладём объект в словарь.
-        print("зарегистрирован")
-        
+        print(f"{self.name} зарегистрирован в {library.name}")
+
+
+
+
+
+    
     def take_item(self, library, item_id):
 
         if library.name not in self.libraries:    # если предмет не зарегестрирован, то не получится взять предмет (по идеи)
@@ -114,9 +120,11 @@ class Person:
 
 class Library: #библиотека
     def __init__(self,name):
-        self.name=name
-        self.items={}
-        self.user={}
+        self.name=name # название библиотеки
+        self.items={} # словарь всех объектов в библиотеке # например # {"b1": book1, "d1": dvd1, "s1": soft1}
+        self.members={} # cловарь всех читателей библиотеки # например {"Вася": vasya, "Петя": petya}
+        self.all_rentals=[] # список всех выдач # список потому что могут быть повторы
+        self.all_finels=[]  # список всех штрафов # список потому что могут быть повторы
 
     def add_item(self,item): #добавляет предмет в библиотеку
         self.items[item.item_id] = item
@@ -134,7 +142,7 @@ class Library: #библиотека
             item = self.items[item_id]    
         
     
-#test
+#test будем делать через функцию 
 while True: #возможно поменяем меню
     print("1-Lisa raamatukogu")
     print("0-lopetab too")
