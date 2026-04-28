@@ -60,7 +60,6 @@ class Person:
             print("такого обьекта нет")
             return
         
-        item = library.items[item.id]
 
         if isinstance(item, Tarkvara) and item_id in self.rentals:   # если по и его айди уже есть в приобретениях, то повторного получить его уже не получится у будет выведено следующее:
             print("ПО уже взято!")
@@ -69,14 +68,16 @@ class Person:
         if not isinstance(item, Tarkvara) and item.available <= 0:   #  если предмет больше не доступен в библиотеке, то выдаёт следующее:
             print("Все экземпляры выданы")
             return
-
-        item.popularity += 1  # увеличиваем популярность предмета на 1
+        
+       
         
         if not isinstance(item, Tarkvara):  # если это НЕ программное обеспечение
             item.available -= 1  # уменьшаем количество доступных экземпляров
-            due_date = datetime.now() + timedelta(days=item.day_arent)  # считаем дату возврата
+            due_date = datetime.now() + timedelta(days=item.day_arent)
+            item.popularity += 1  # увеличиваем популярность предмета на 1# считаем дату возврата
         else:  # если это ПО
-            due_date = None  # у ПО нет срока возврата
+            due_date = None
+            item.popularity += 1  # увеличиваем популярность предмета на 1# у ПО нет срока возврата
         
         self.rentals[item_id] = (item, due_date)  # сохраняем, что пользователь взял предмет
         library.rentals.append((self, item))  # добавляем запись о выдаче в библиотеку
