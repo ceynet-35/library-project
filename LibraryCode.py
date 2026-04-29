@@ -54,7 +54,7 @@ class Person:
      def borrow(self, library, item): # Matvei
          pass
          
-    def return_item(self, library, item):  # Matvei
+    def return_item(self, library, item):  # Egor
         pass
         
     def show_rentals(self): # Egor
