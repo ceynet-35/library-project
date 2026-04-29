@@ -50,73 +50,18 @@ class Person:
         self.libraries[library.name]=library # например Вася записывает библиотеку в свой список библиотек -> self.libraries = {"Центральная": lib1} КОРОТКО: прощее говоря мы кладём объект в словарь.
         library.members[self.name]=self #Библиотека записывает Васю в свой список читателей -> # library.members = {"Вася": vasya} КОРОТКО: прощее говоря мы кладём объект в словарь.
         print(f"{self.name} зарегистрирован в {library.name}")
-
-
-
-
-
-    
-    def take_item(self, library, item_id):
-
-        if library.name not in self.libraries:    # если предмет не зарегестрирован, то не получится взять предмет (по идеи)
-            print("Не зарегестрирован")
-            return
-
-        if item_id not in library.items:    # если обьекта нет в списке, то выводится следующее:
-            print("такого обьекта нет")
-            return
         
-
-        if isinstance(item, Tarkvara) and item_id in self.rentals:   # если по и его айди уже есть в приобретениях, то повторного получить его уже не получится у будет выведено следующее:
-            print("ПО уже взято!")
-            return
+     def borrow(self, library, item): # Matvei
+         pass
+         
+    def return_item(self, library, item):  # Matvei
+        pass
         
-        if not isinstance(item, Tarkvara) and item.available <= 0:   #  если предмет больше не доступен в библиотеке, то выдаёт следующее:
-            print("Все экземпляры выданы")
-            return
+    def show_rentals(self): # Egor
+        pass
         
-       
-        
-        if not isinstance(item, Tarkvara):  # если это НЕ программное обеспечение
-            item.available -= 1  # уменьшаем количество доступных экземпляров
-            due_date = datetime.now() + timedelta(days=item.day_arent)
-            item.popularity += 1  # увеличиваем популярность предмета на 1# считаем дату возврата
-        else:  # если это ПО
-            due_date = None
-            item.popularity += 1  # увеличиваем популярность предмета на 1# у ПО нет срока возврата
-        
-        self.rentals[item_id] = (item, due_date)  # сохраняем, что пользователь взял предмет
-        library.rentals.append((self, item))  # добавляем запись о выдаче в библиотеку
-        
-        print(f"{self.name} взял {item.title}")  # выводим сообщение о взятии
-        
-        
-        # ВОЗВРАТ
-        def return_item(self, library, item_id):  # функция возврата предмета
-        
-            if item_id not in self.rentals:  # если пользователь не брал этот предмет
-                print("Ты не брал это")  # сообщение об ошибке
-                return  # выходим из функции
-        
-            item, due_date = self.rentals[item_id]  # получаем предмет и дату возврата
-        
-            if isinstance(item, Tarkvara):  # если это ПО
-                print("ПО возвращать не нужно")  # сообщаем, что возврат не нужен
-                return  # выходим
-        
-            today = datetime.now()  # получаем текущую дату
-        
-            if today > due_date:  # если просрочили
-                days = (today - due_date).days  # считаем количество дней просрочки
-                fine = days * item.trahv_paevast  # считаем штраф
-                self.fines += fine  # добавляем штраф пользователю
-                library.fines.append(fine)  # записываем штраф в библиотеку
-                print(f"Штраф: {fine:.2f} €")  # выводим штраф
-        
-            item.available += 1  # увеличиваем количество доступных экземпляров
-            del self.rentals[item_id]  # удаляем предмет из списка взятых
-        
-            print(f"{self.name} вернул {item.title}")  # сообщение о возврате
+     def show_fines(self): # Egor
+        pass
 
 class Library: #библиотека
     def __init__(self,name):
@@ -125,23 +70,29 @@ class Library: #библиотека
         self.members={} # cловарь всех читателей библиотеки # например {"Вася": vasya, "Петя": petya}
         self.all_rentals=[] # список всех выдач # список потому что могут быть повторы
         self.all_finels=[]  # список всех штрафов # список потому что могут быть повторы
-
-    def add_item(self,item): #добавляет предмет в библиотеку
-        self.items[item.item_id] = item
-    
-    def get_items(self,item): # передать пользователю предмет
-        self.rentals[item.item_id] = item
-    
-    def add_person(self,person): #добавляет пользователя в библиотеку
-        self.user[person.person_id] = person 
-
-    def return_item(self,item): #пользователь возвращает  предмет в библиотеку
-        if item.id not in person.rentals:
-            print("you dont  have this item")
-        else:
-            item = self.items[item_id]    
         
-    
+    def add_item(self, item): #Egor
+        pass
+        
+    def give_item(self, person, item): #Nikita 
+        pass
+        
+    def take_back(self, person, item, rental): #Egor
+        pass
+        
+    def show_popular(self): # Egor
+        pass
+        
+    def show_all_fines(self): #Nikita
+        pass
+
+
+
+
+
+
+
+
 #test будем делать через функцию 
 while True: #возможно поменяем меню
     print("1-Lisa raamatukogu")
