@@ -61,7 +61,7 @@ class Person:
         pass
         
      def show_fines(self): # Egor
-        pass
+        print(f"Штраф {self.name}: {self.fines:.2f} €")
 
 class Library: #библиотека
     def __init__(self,name):
@@ -72,7 +72,8 @@ class Library: #библиотека
         self.all_finels=[]  # список всех штрафов # список потому что могут быть повторы
         
     def add_item(self, item): #Egor
-        pass
+        self.items[item.item_id] = item
+        print(f"Добавлен: {item.title}")
         
     def give_item(self, person, item): #Nikita 
         pass
