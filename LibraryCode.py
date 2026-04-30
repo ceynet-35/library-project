@@ -51,8 +51,11 @@ class Person:
         library.members[self.name]=self #Библиотека записывает Васю в свой список читателей -> # library.members = {"Вася": vasya} КОРОТКО: прощее говоря мы кладём объект в словарь.
         print(f"{self.name} зарегистрирован в {library.name}")
         
-     def borrow(self, library, item): # Matvei
-         pass
+     def borrow(self, library, item): # Matvei это функция выдает предмет 
+         if library.name not in self.libraries: # проверям есть ли назавние библиотеки среди библиотек васи
+             print(f"{self.name} не зарегистрирован в {library.name}") # если нету то получаеться вася не зареган и пишем это
+             return # else не используем потому что ретурн уже останавливает метод
+        library.give_item(self, item) # если зареган то просим библиотеку выдать предмет self - это вася item - что хотим взять
          
     def return_item(self, library, item):  # Egor
         pass
