@@ -1,4 +1,4 @@
-# ramatukogu
+# raamatukogu
 Оsalejad:
 Nikita Jakovlev
 Jegor Nefedov
