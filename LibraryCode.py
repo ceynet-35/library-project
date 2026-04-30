@@ -64,7 +64,7 @@ class Person:
         print(f"Штраф {self.name}: {self.fines:.2f} €")
 
 class Library: #библиотека
-    def __init__(self,name):
+    def __init__(self,name): #сикс севен
         self.name=name # название библиотеки
         self.items={} # словарь всех объектов в библиотеке # например # {"b1": book1, "d1": dvd1, "s1": soft1}
         self.members={} # cловарь всех читателей библиотеки # например {"Вася": vasya, "Петя": petya}
@@ -75,8 +75,20 @@ class Library: #библиотека
         self.items[item.item_id] = item
         print(f"Добавлен: {item.title}")
         
-    def give_item(self, person, item): #Nikita 
-        pass
+    def give_item(self, person, item): #Nikita #функция выдачи предметов человеку
+        if item.item_id not in self.items: #проверка присутствует предмет в библиотеке или нет
+            print(f"{item.title} нет в библиотеке {self.name}")
+            return
+        if isinstance(item,Tarkvara):   #проверка, взял ли пользователь уже этот предмет 
+            if item.item_id in person.rentals:
+                print(f"{person.name} уже взял {item.title}")
+                return
+            item.popularity += 1
+            rental = {"item": item,"date_taken": datetime.now().date(), "due_date": None}
+            person.rentals[item.item_id] = rental #объект выдан человеку
+            self.all_rentals.append({"person": person.name, "item_id": item.item_id, "title": item.title, "date_taken": datetime.now().date(), "due_date": None}) #добавление записи о выдаче предмета(кто взял, что и когда)
+            print(f"{person.name} взял ПО: {item.title}")
+            return
         
     def take_back(self, person, item, rental): #Egor
         pass
