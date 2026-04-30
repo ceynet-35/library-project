@@ -92,6 +92,16 @@ class Library: #библиотека
             self.all_rentals.append({"person": person.name, "item_id": item.item_id, "title": item.title, "date_taken": datetime.now().date(), "due_date": None}) #добавление записи о выдаче предмета(кто взял, что и когда)
             print(f"{person.name} взял ПО: {item.title}")
             return
+        if item.available <=0: #проверка, есть ли экземпляры в библиотеке
+            print(f"{item.title} - выданы все экземпляры")
+            return
+        item.available -= 1 
+        item.popularity += 1 
+        due_date = datetime.now().date() + timedelta(days = item.day_rent)
+        rental = {"item": item, "date_taken": datetime.now().date(), "due_date": due_date}
+        person.rentals[items.item_id] = rental
+        self.all_rentals.append({"person": person.name, "item_id": item.item_id, "title": item.title, "date_taken": datetime.now().date(), "due_date": due_date}) #добавление записи о выдаче предмета
+        print(f"{person.name} взял: {item.title}, вернуть до:  {due_date}")
         
     def take_back(self, person, item, rental): #Egor
         pass
