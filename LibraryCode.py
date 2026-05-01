@@ -10,7 +10,7 @@ class Item: #КЛАСС ITEM ГОТОВЫЙ ЕГО НЕ ТРОГАТЬ!!!!!!!!!!
         self.title=title     # название объекта
         self.popularity=0    # популярность объекта (будет увиличиваться когда предмед будут брать пример 7.5./10)
         self.amount=amount         # сколько всего экземпляров в библеотеке
-        self.available=amount #чуть ниже рассписанно
+        self.available=amount #чуть ниже рассписанноdw
         # тут
         # сколько доступно прямо сейчас — меняется
         # когда берут: available -= 1
@@ -104,10 +104,29 @@ class Library: #библиотека
         print(f"{person.name} взял: {item.title}, вернуть до:  {due_date}")
         
     def take_back(self, person, item, rental): #Egor
-        pass
+        today = datetime.now().date()
+        due_date = rental["due_date"]
+        if today > due_date:
+            days_late = (today - due_date).days
+            fine = days_late * item.fine_per_day
+            person.fines += fine
+            self.all_fines.append({
+                "person": person.name,
+                "item_id": item.item_id,
+                "title": item.title,
+                "days_late": days_late,
+                "fine": fine
+            })
+            print(f"Просрочка {days_late} дней! Штраф: {fine:.2f} €")
+        else:
+            print(f"{item.title} возвращён вовремя!")
+        item.available += 1
         
     def show_popular(self): # Egor
-        pass
+         sorted_items = sorted(self.items.values(), key=lambda x: x.popularity, reverse=True)
+        print(f"--- Топ популярных в {self.name} ---")
+        for i, item in enumerate(sorted_items[:10]):
+            print(f"  {i+1}. {item.title} | популярность: {item.popularity}")
         
     def show_all_fines(self): #Nikita
         pass
