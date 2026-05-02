@@ -60,8 +60,14 @@ class Person:
     def return_item(self, library, item):  # Egor
         pass
         
-    def show_rentals(self): # Egor
-        pass
+    def show_rentals(self):  #Egor Pedik
+        if len(self.rentals) == 0:
+            print(f"У {self.name} ничего нет на руках")
+            return
+        print(f"Объекты у {self.name}")
+        for item_id, rental in self.rentals.items():
+            item = rental["item"]
+            print(f"  {item.title} | взял: {rental['date_taken']} | вернуть до: {rental['due_date']}")
         
      def show_fines(self): # Egor
         print(f"Штраф {self.name}: {self.fines:.2f} €")
