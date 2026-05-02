@@ -110,13 +110,7 @@ class Library: #библиотека
             days_late = (today - due_date).days
             fine = days_late * item.fine_per_day
             person.fines += fine
-            self.all_fines.append({
-                "person": person.name,
-                "item_id": item.item_id,
-                "title": item.title,
-                "days_late": days_late,
-                "fine": fine
-            })
+            self.all_fines.append({"person": person.name, "item_id": item.item_id, "title": item.title, "days_late": days_late, "fine": fine})
             print(f"Просрочка {days_late} дней! Штраф: {fine:.2f} €")
         else:
             print(f"{item.title} возвращён вовремя!")
