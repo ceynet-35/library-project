@@ -57,8 +57,16 @@ class Person:
              return # else не используем потому что ретурн уже останавливает метод
         library.give_item(self, item) # если зареган то просим библиотеку выдать предмет self - это вася item - что хотим взять
          
-    def return_item(self, library, item):  # Egor
-        pass
+    def return_item(self, library, item):  #Matvei
+        if isinstance(item, Tarkvara):
+            print(f"ПО возвращать не нужно!")
+            return
+        if item.item_id not in self.rentals:
+            print(f"{self.name} не брал {item.title}")
+            return
+        rental = self.rentals[item.item_id]
+        library.take_back(self, item, rental)
+        del self.rentals[item.item_id]
         
     def show_rentals(self):  #Egor Pedik
         if len(self.rentals) == 0:
