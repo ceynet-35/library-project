@@ -155,7 +155,41 @@ class Library:
         print(f"штрафы в {self.name}")
         for f in self.all_fines:
             print(f" {f['person']}, {f['title']}, {f['days_late']} дней, {f['fine']:.2f} евро")
-
+            
+    def save_to_csv(self): # сохраняем все данные библиотеки в CSV файлы
+        # 1. сохраняем объекты
+        with open(f"{self.name}_items.csv", "w", newline="", encoding="utf-8") as f: # newline="" чтобы не было лишних пустых строк # encoding="utf-8" чтобы русские буквы работали 
+            writer=csv.DictWriter(f, fieldnames=["type", "item_id", "title", "amount", "available", "popularity", "day_rent", "fine_per_day"])
+            writer.writeheader() # writeheader пишет первую строку с названиями колонок
+            for item in self.items.values(): # определяем тип объекта
+                 if isinstance(item, Book):
+                     item_type="Book"
+                 elif isinstance(item, DVD):
+                     item_type="DVD"
+                 else:
+                     item_type="Tarkvara"
+                 writer.writerow({"type": item_type, "item_id": item.item_id, "title": item.title, "amount": item.amount, "available": item.available, "popularity": item.popularity, "day_rent": getattr(item, "day_rent", ""), "fine_per_day": getattr(item, "fine_per_day", "")})
+        print(f"Объекты сохранены в {self.name}_items.csv")
+        
+        # 2. сохраняем историю выдач
+        with open(f"{self.name}_rentals.csv", "w", newline="", encoding="utf-8") as f:
+        writer=csv.DictWriter(f, fieldnames=["person", "item_id", "title", "date_taken", "due_date"])
+        writer.writeheader()
+        for rental in self.all_rentals:
+            writer.writerow(rental)
+        print(f"Выдачи сохранены в {self.name}_rentals.csv")
+        
+        # 3. сохраняем штрафы
+        with open(f"{self.name}_fines.csv", "w", newline="", encoding="utf-8") as f:
+            writer=csv.DictWriter(f, fieldnames=["person", "item_id", "title", "days_late", "fine"])
+            writer.writeheader()
+            for fine in self.all_fines:
+                writer.writerow(fine)
+        print(f"Штрафы сохранены в {self.name}_fines.csv")
+        
+    def load_from_csv(self): # загружаем данные из CSV файлов
+        pass
+            
 
 
 
