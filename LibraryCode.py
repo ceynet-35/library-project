@@ -129,7 +129,12 @@ class Library: #библиотека
             print(f"  {i+1}. {item.title} | популярность: {item.popularity}")
         
     def show_all_fines(self): #Nikita
-        pass
+        if len(self.all_fines) == 0:
+            print("штрафов нет")
+            return
+        print(f"штрафы в {self.name}")
+        for f in self.all_fines:
+            print(f" {f['person']}, {f['title']}, {f['days_late']} дней, {f['fine']:.2f} евро")
 
 
 
