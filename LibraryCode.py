@@ -159,7 +159,7 @@ class Library:
     def save_to_csv(self): # сохраняем все данные библиотеки в CSV файлы
         # 1. сохраняем объекты
         with open(f"{self.name}_items.csv", "w", newline="", encoding="utf-8") as f: # newline="" чтобы не было лишних пустых строк # encoding="utf-8" чтобы русские буквы работали 
-            writer=csv.DictWriter(f, fieldnames=["type", "item_id", "title", "amount", "available", "popularity", "day_rent", "fine_per_day"])
+            writer=csv.DictWriter(f, fieldnames=["type", "item_id", "title", "amount", "available", "popularity", "day_rent", "fine_per_day"]) # f — в какой файл пишем # fieldnames — названия колонок
             writer.writeheader() # writeheader пишет первую строку с названиями колонок
             for item in self.items.values(): # определяем тип объекта
                  if isinstance(item, Book):
@@ -188,7 +188,100 @@ class Library:
         print(f"Штрафы сохранены в {self.name}_fines.csv")
         
     def load_from_csv(self): # загружаем данные из CSV файлов
-        pass
+        # 1. загружаем объекты
+        filename = f"{self.name}_items.csv" # просто сохраняем название файла в переменную
+        if os.path.exists(filename): # проверяем существует ли файл на компьютере, файла нет пропускаем, файл есть загружаем
+            with open(filename, "r", encoding="utf-8") as f: # открываем файл и читаем
+                reader = csv.DictReader(f) # DictReader читает CSV файл каждую строку возвращает как словарь
+                for row in reader: # перебираем каждую строку в файле
+                    if row["type"] == "Book": # если тип Book создаем объект Book
+                        item = Book(row["item_id"], row["title"], int(row["amount"]), int(row["day_rent"]))
+                    elif row["type"] == "DVD": # если тип DVD создаем объект DVD
+                        item = DVD(row["item_id"], row["title"], int(row["amount"]), int(row["day_rent"]))
+                    else: # иначе создаем объект Tarkvara
+                        item = Tarkvara(row["item_id"], row["title"])
+                        
+                    item.popularity = int(row["popularity"]) # восстанавливаем популярность из CSV и int() потому что в CSV это строка "5" а не число 5
+                    item.available = int(row["available"]) # восстанавливаем сколько доступно
+                    self.items[item.item_id] = item # кладем объект в словарь библиотеки
+            print(f"Объекты загружены из {filename}") # сообщаем что загрузка прошла успешно
+            
+            # 2. загружаем историю выдач
+            filename = f"{self.name}_rentals.csv"
+            if os.path.exists(filename):
+                with open(filename, "r", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        self.all_rentals.append(row)
+                    print(f"Выдачи загружены из {filename}")
+            
+            # 3. загружаем штрафы
+            filename = f"{self.name}_fines.csv"
+            if os.path.exists(filename):
+                with open(filename, "r", encoding="utf-8") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        self.all_fines.append(row)
+                print(f"Штрафы загружены из {filename}")
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#ФУНКЦИИ ДЛЯ ЛЮДЕЙ CSV
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+# save_people, load_people, save_libraries, load_libraries это обычные функции не методы класса потому что они работают со всеми библиотеками и людьми сразу, а не с одной конкретной
+
+def save_people(people): # сохраняем всех людей в CSV
+    pass
+
+def load_people(): # загружаем людей из CSV
+    pass
+
+def load_libraries(): # загружаем список библиотек из CSV
+    pass
+
+def save_libraries(libraries): # сохраняем список библиотек в CSV
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#MЕНЮ
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    
+                
+            
+
             
 
 
