@@ -260,8 +260,19 @@ def load_people():
         print("Люди загружены из people.csv")  # сообщение об успешной загрузке
     return people  # возвращаем словарь людей
 
-def load_libraries(): # загружаем список библиотек из CSV
-    pass
+def load_libraries():
+    # загружаем список библиотек из CSV
+    libraries = {}  # создаём пустой словарь
+    if os.path.exists("libraries.csv"):  # проверяем существует ли файл
+        with open("libraries.csv", "r", encoding="utf-8") as f:  # открываем файл
+            reader = csv.DictReader(f)  # читаем строки как словари
+            for row in reader:  # перебираем строки
+                lib = Library(row["name"])  # создаём библиотеку
+                lib.load_from_csv()  # загружаем её данные
+                # загружаем объекты, выдачи и штрафы этой библиотеки
+                libraries[lib.name] = lib  # добавляем в словарь
+        print("Библиотеки загружены!")  # сообщение об успешной загрузке
+    return libraries  # возвращаем словарь библиотек
 
 def save_libraries(libraries): # сохраняем список библиотек в CSV
     pass
