@@ -246,8 +246,19 @@ def save_people(people):
             })
     print("Люди сохранены в people.csv")  # сообщение об успешном сохранении
 
-def load_people(): # загружаем людей из CSV
-    pass
+def load_people():
+    # загружаем людей из CSV
+    people = {}  # создаём пустой словарь
+    if os.path.exists("people.csv"):  # проверяем существует ли файл
+        with open("people.csv", "r", encoding="utf-8") as f:  # открываем файл для чтения
+            reader = csv.DictReader(f)  # читаем файл как словари
+            for row in reader:  # перебираем строки
+                person = Person(row["name"])  # создаём объект человекаvc
+                person.fines = float(row["fines"])  # восстанавливаем штраф
+                # float превращает строку "0.12" в число 0.12
+                people[person.name] = person  # добавляем в словарь
+        print("Люди загружены из people.csv")  # сообщение об успешной загрузке
+    return people  # возвращаем словарь людей
 
 def load_libraries(): # загружаем список библиотек из CSV
     pass
