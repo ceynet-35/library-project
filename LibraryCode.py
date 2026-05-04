@@ -168,7 +168,7 @@ class Library:
                      item_type="DVD"
                  else:
                      item_type="Tarkvara"
-                 writer.writerow({"type": item_type, "item_id": item.item_id, "title": item.title, "amount": item.amount, "available": item.available, "popularity": item.popularity, "day_rent": getattr(item, "day_rent", ""), "fine_per_day": getattr(item, "fine_per_day", "")})   # getattr объект, "поле", "если нет"    
+                 writer.writerow({"type": item_type, "item_id": item.item_id, "title": item.title, "amount": item.amount, "available": item.available, "popularity": item.popularity, "day_rent": getattr(item, "day_rent", ""), "fine_per_day": getattr(item, "fine_per_day", "")})   # getattr объект, "поле", "если нет"  # у Book и DVD есть day_rent запишет 14 или 7  у Tarkvara нет day_rent → запишет ""  
         print(f"Объекты сохранены в {self.name}_items.csv")
         
         # 2. сохраняем историю выдач
