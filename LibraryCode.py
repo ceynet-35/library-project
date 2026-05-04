@@ -231,8 +231,20 @@ class Library:
 
 # save_people, load_people, save_libraries, load_libraries это обычные функции не методы класса потому что они работают со всеми библиотеками и людьми сразу, а не с одной конкретной
 
-def save_people(people): # сохраняем всех людей в CSV
-    pass
+def save_people(people):
+    # сохраняем всех людей в CSV
+    with open("people.csv", "w", newline="", encoding="utf-8") as f:  # открываем файл для записи
+        writer = csv.DictWriter(f, fieldnames=["name", "fines", "libraries"])  # создаём запись с колонками
+        writer.writeheader()  # записываем заголовки
+        for person in people.values():  # перебираем всех людей
+            writer.writerow({  # записываем одну строку
+                "name": person.name,  # имя человека
+                "fines": person.fines,  # сумма штрафа
+                "libraries": ",".join(person.libraries.keys())  # список библиотек в строку
+                # join склеивает список в строку через запятую
+                # ["Центральная", "Районная"] → "Центральная,Районная"
+            })
+    print("Люди сохранены в people.csv")  # сообщение об успешном сохранении
 
 def load_people(): # загружаем людей из CSV
     pass
