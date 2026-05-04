@@ -274,9 +274,16 @@ def load_libraries():
         print("Библиотеки загружены!")  # сообщение об успешной загрузке
     return libraries  # возвращаем словарь библиотек
 
-def save_libraries(libraries): # сохраняем список библиотек в CSV
-    pass
-
+def save_libraries(libraries):
+    # сохраняем список библиотек в CSV
+    with open("libraries.csv", "w", newline="", encoding="utf-8") as f:  # открываем файл для записи
+        writer = csv.DictWriter(f, fieldnames=["name"])  # задаём колонку name
+        writer.writeheader()  # записываем заголовок
+        for lib in libraries.values():  # перебираем библиотеки
+            writer.writerow({"name": lib.name})  # записываем название
+            lib.save_to_csv()  # сохраняем данные библиотеки
+            # сохраняем объекты, выдачи и штрафы каждой библиотеки
+    print("Библиотеки сохранены!")  # сообщение об успешном сохранении
 
 
 
