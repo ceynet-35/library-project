@@ -284,6 +284,267 @@ def save_libraries(libraries):
             lib.save_to_csv()  # сохраняем данные библиотеки
             # сохраняем объекты, выдачи и штрафы каждой библиотеки
     print("Библиотеки сохранены!")  # сообщение об успешном сохранении
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#МЕНЮ
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+libraries = load_libraries()
+people = load_people()
+
+def menu_dobavit_predmet(library):
+    # меню добавления объекта в библиотеку
+    while True:
+        print("\n  1 - Книга")
+        print("  2 - ПО (Tarkvara)")
+        print("  3 - DVD")
+        print("  0 - Назад")
+        vybor = input("  Выбери тип объекта: ")
+
+        if vybor == "0":
+            break
+        elif vybor == "1":
+            item_id = input("  ID книги: ")
+            title = input("  Название книги: ")
+            amount = int(input("  Сколько экземпляров: "))
+            day_rent = int(input("  Сколько дней можно держать (по умолчанию 14): ") or 14)
+            book = Book(item_id, title, amount, day_rent)
+            library.add_item(book)
+        elif vybor == "2":
+            item_id = input("  ID ПО: ")
+            title = input("  Название ПО: ")
+            soft = Tarkvara(item_id, title)
+            library.add_item(soft)
+        elif vybor == "3":
+            item_id = input("  ID DVD: ")
+            title = input("  Название DVD: ")
+            amount = int(input("  Сколько экземпляров: "))
+            dvd = DVD(item_id, title, amount)
+            library.add_item(dvd)
+        else:
+            print("  Ошибка! Выбери 0-3")
+
+def menu_vzyat_predmet(library):
+    # меню выдачи объекта читателю
+    if len(people) == 0:
+        print("  Нет людей!")
+        return
+
+    print("\n  Люди:")
+    for name in people:
+        print(f"    - {name}")
+    name = input("  Имя человека: ")
+
+    if name not in people:
+        print(f"  Человек {name} не найден!")
+        return
+    person = people[name]
+    # достаём объект человека из словаря people
+
+    if len(library.items) == 0:
+        print("  В библиотеке нет объектов!")
+        return
+
+    print("\n  Объекты в библиотеке:")
+    for item_id, item in library.items.items():
+        if isinstance(item, Tarkvara):
+            print(f"    {item_id} - {item.title} | ПО | безлимит")
+        else:
+            print(f"    {item_id} - {item.title} | доступно: {item.available}/{item.amount}")
+
+    item_id = input("  ID объекта: ")
+    if item_id not in library.items:
+        print(f"  Объект {item_id} не найден!")
+        return
+
+    item = library.items[item_id]
+    # достаём объект из словаря библиотеки
+
+    person.borrow(library, item)
+
+def menu_vernut_predmet(library):
+    # меню возврата объекта
+    if len(people) == 0:
+        print("  Нет людей!")
+        return
+
+    print("\n  Люди:")
+    for name in people:
+        print(f"    - {name}")
+    name = input("  Имя человека: ")
+
+    if name not in people:
+        print(f"  Человек {name} не найден!")
+        return
+    person = people[name]
+
+    if len(person.rentals) == 0:
+        print(f"  У {name} ничего нет на руках!")
+        return
+
+    print(f"\n  На руках у {name}:")
+    for item_id, rental in person.rentals.items():
+        item = rental["item"]
+        print(f"    {item_id} - {item.title}")
+
+    item_id = input("  ID объекта для возврата: ")
+    if item_id not in person.rentals:
+        print(f"  Объект {item_id} не найден у {name}!")
+        return
+
+    item = person.rentals[item_id]["item"]
+    person.return_item(library, item)
+
+def menu_dannye(library):
+    # меню данных библиотеки
+    while True:
+        print("\n  1 - Все объекты в библиотеке")
+        print("  2 - Все читатели")
+        print("  3 - Профиль пользователя")
+        print("  4 - Штрафы библиотеки")
+        print("  5 - Топ популярных")
+        print("  0 - Назад")
+        vybor = input("  Выбери: ")
+
+        if vybor == "0":
+            break
+        elif vybor == "1":
+            if len(library.items) == 0:
+                print("  В библиотеке нет объектов!")
+            else:
+                print(f"\n  --- Объекты в {library.name} ---")
+                for item_id, item in library.items.items():
+                    if isinstance(item, Tarkvara):
+                        print(f"  {item_id} | {item.title} | ПО | популярность: {item.popularity}")
+                    else:
+                        print(f"  {item_id} | {item.title} | доступно: {item.available}/{item.amount} | популярность: {item.popularity}")
+        elif vybor == "2":
+            if len(library.members) == 0:
+                print("  Нет читателей!")
+            else:
+                print(f"\n  --- Читатели {library.name} ---")
+                for name in library.members:
+                    print(f"    - {name}")
+        elif vybor == "3":
+            if len(people) == 0:
+                print("  Нет людей!")
+                continue
+            print("\n  Люди:")
+            for name in people:
+                print(f"    - {name}")
+            name = input("  Имя человека: ")
+            if name not in people:
+                print(f"  Человек {name} не найден!")
+                continue
+            person = people[name]
+            person.show_rentals()
+            person.show_fines()
+        elif vybor == "4":
+            library.show_all_fines()
+        elif vybor == "5":
+            library.show_popular()
+        else:
+            print("  Ошибка! Выбери 0-5")
+
+def menu_biblioteki(library):
+    # главное меню одной библиотеки
+    while True:
+        print(f"\n=== {library.name} ===")
+        print("1 - Зарегистрировать человека")
+        print("2 - Добавить объект в библиотеку")
+        print("3 - Выдать объект")
+        print("4 - Вернуть объект")
+        print("5 - Данные")
+        print("0 - Назад")
+        vybor = input("Выбери действие: ")
+
+        if vybor == "0":
+            break
+        elif vybor == "1":
+            if len(people) == 0:
+                print("  Сначала создай человека в главном меню!")
+                continue
+            print("\n  Люди:")
+            for name in people:
+                print(f"    - {name}")
+            name = input("  Имя человека: ")
+            if name not in people:
+                print(f"  Человек {name} не найден!")
+                continue
+            people[name].register(library)
+        elif vybor == "2":
+            menu_dobavit_predmet(library)
+        elif vybor == "3":
+            menu_vzyat_predmet(library)
+        elif vybor == "4":
+            menu_vernut_predmet(library)
+        elif vybor == "5":
+            menu_dannye(library)
+        else:
+            print("Ошибка! Выбери 0-5")
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ГЛАВНОЕ МЕНЮ
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+while True:
+    print("\n=============================")
+    print("        ГЛАВНОЕ МЕНЮ")
+    print("=============================")
+    print("1 - Создать библиотеку")
+    print("2 - Создать человека")
+    print("3 - Войти в библиотеку")
+    print("4 - Показать все библиотеки")
+    print("5 - Показать всех людей")
+    print("0 - Выход")
+    vybor = input("Выбери действие: ")
+
+    if vybor == "0":
+        # сохраняем всё перед выходом
+        save_libraries(libraries)
+        save_people(people)
+        print("До свидания!")
+        break
+    elif vybor == "1":
+        name = input("Название библиотеки: ")
+        if name in libraries:
+            print(f"Библиотека {name} уже существует!")
+        else:
+            libraries[name] = Library(name)
+            print(f"Библиотека {name} создана!")
+    elif vybor == "2":
+        name = input("Имя человека: ")
+        if name in people:
+            print(f"Человек {name} уже существует!")
+        else:
+            people[name] = Person(name)
+            print(f"Человек {name} создан!")
+    elif vybor == "3":
+        if len(libraries) == 0:
+            print("Нет библиотек! Сначала создай библиотеку.")
+            continue
+        print("\nБиблиотеки:")
+        for name in libraries:
+            print(f"  - {name}")
+        name = input("Название библиотеки: ")
+        if name not in libraries:
+            print(f"Библиотека {name} не найдена!")
+        else:
+            menu_biblioteki(libraries[name])
+    elif vybor == "4":
+        if len(libraries) == 0:
+            print("Нет библиотек!")
+        else:
+            print("\nВсе библиотеки:")
+            for name in libraries:
+                print(f"  - {name} | читателей: {len(libraries[name].members)} | объектов: {len(libraries[name].items)}")
+    elif vybor == "5":
+        if len(people) == 0:
+            print("Нет людей!")
+        else:
+            print("\nВсе люди:")
+            for name in people:
+                print(f"  - {name} | библиотек: {len(people[name].libraries)}")
+    else:
+        print("Ошибка! Выбери 0-5")
 
 
 
@@ -316,9 +577,8 @@ def save_libraries(libraries):
 
 
 
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#MЕНЮ
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
     
                 
             
