@@ -58,7 +58,7 @@ class Person:
         library.members[self.name]=self #Библиотека записывает Васю в свой список читателей -> # library.members = {"Вася": vasya} КОРОТКО: прощее говоря мы кладём объект в словарь.
         print(f"{self.name} зарегистрирован в {library.name}")
         
-     def borrow(self, library, item): # это функция выдает предмет человеку
+    def borrow(self, library, item): # это функция выдает предмет человеку
          if library.name not in self.libraries: # проверям есть ли назавние библиотеки среди библиотек васи
              print(f"{self.name} не зарегистрирован в {library.name}") # если нету то получаеться вася не зареган и пишем это
              return # else не используем потому что ретурн уже останавливает метод
@@ -84,7 +84,7 @@ class Person:
             item = rental["item"] # достаём объект книги из словаря rental и rental находится в Library в def give_item
             print(f"  {item.title} | взял: {rental['date_taken']} | вернуть до: {rental['due_date']}")
         
-     def show_fines(self):# показываем штраф человека
+    def show_fines(self):# показываем штраф человека
          print(f"Штраф {self.name}: {self.fines:.2f} €")
 
          
