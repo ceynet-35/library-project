@@ -3,7 +3,7 @@
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 import csv # сделаем логику а потом уже добавим работу с csv файлами
-from datetime import datetime # это для работы с временим
+from datetime import datetime, timedelta # это для работы с временим
 import os
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -62,7 +62,7 @@ class Person:
          if library.name not in self.libraries: # проверям есть ли назавние библиотеки среди библиотек васи
              print(f"{self.name} не зарегистрирован в {library.name}") # если нету то получаеться вася не зареган и пишем это
              return # else не используем потому что ретурн уже останавливает метод
-        library.give_item(self, item) # если зареган то просим библиотеку выдать предмет self - это вася item - что хотим взять
+         library.give_item(self, item) # если зареган то просим библиотеку выдать предмет self - это вася item - что хотим взять
          
     def return_item(self, library, item):  # возвращаем объект в библиотеку
         if isinstance(item, Tarkvara): # у ПО другая логика
@@ -84,8 +84,8 @@ class Person:
             item = rental["item"] # достаём объект книги из словаря rental и rental находится в Library в def give_item
             print(f"  {item.title} | взял: {rental['date_taken']} | вернуть до: {rental['due_date']}")
         
-     def show_fines(self): # показываем штраф человека
-        print(f"Штраф {self.name}: {self.fines:.2f} €")
+     def show_fines(self):# показываем штраф человека
+         print(f"Штраф {self.name}: {self.fines:.2f} €")
 
          
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -125,7 +125,7 @@ class Library:
         item.popularity += 1  # увеличиваем популярность
         due_date = datetime.now().date() + timedelta(days = item.day_rent) # считаем дату возврата сегодня + дни аренды
         rental = {"item": item, "date_taken": datetime.now().date(), "due_date": due_date}
-        person.rentals[items.item_id] = rental # кладём rental в словарь человека
+        person.rentals[item.item_id] = rental # кладём rental в словарь человека
         self.all_rentals.append({"person": person.name, "item_id": item.item_id, "title": item.title, "date_taken": datetime.now().date(), "due_date": due_date}) #добавление записи о выдаче предмета
         print(f"{person.name} взял: {item.title}, вернуть до:  {due_date}")
         
@@ -142,8 +142,8 @@ class Library:
             print(f"{item.title} возвращён вовремя!")
         item.available += 1 # возвращаем экземпляр
         
-    def show_popular(self): # топ 10 популярных объектов
-         sorted_items = sorted(self.items.values(), key=lambda x: x.popularity, reverse=True)
+    def show_popular(self):# топ 10 популярных объектов
+        sorted_items = sorted(self.items.values(), key=lambda x: x.popularity, reverse=True)
         print(f"--- Топ популярных в {self.name} ---")
         for i, item in enumerate(sorted_items[:10]):
             print(f"  {i+1}. {item.title} | популярность: {item.popularity}")
@@ -173,11 +173,11 @@ class Library:
         
         # 2. сохраняем историю выдач
         with open(f"{self.name}_rentals.csv", "w", newline="", encoding="utf-8") as f:
-        writer=csv.DictWriter(f, fieldnames=["person", "item_id", "title", "date_taken", "due_date"])
-        writer.writeheader()
-        for rental in self.all_rentals:
-            writer.writerow(rental)
-        print(f"Выдачи сохранены в {self.name}_rentals.csv")
+            writer=csv.DictWriter(f, fieldnames=["person", "item_id", "title", "date_taken", "due_date"])
+            writer.writeheader()
+            for rental in self.all_rentals:
+                writer.writerow(rental)
+            print(f"Выдачи сохранены в {self.name}_rentals.csv")
         
         # 3. сохраняем штрафы
         with open(f"{self.name}_fines.csv", "w", newline="", encoding="utf-8") as f:
@@ -233,7 +233,7 @@ class Library:
 
 def save_people(people):
     # сохраняем всех людей в CSV
-    with open("people.csv", "w", newline="", encoding="utf-8") as f:  # открываем файл для записи
+    with open("people.csv", "w", newline="", encoding="utf-8") as f:# открываем файл для записи
         writer = csv.DictWriter(f, fieldnames=["name", "fines", "libraries"])  # создаём запись с колонками
         writer.writeheader()  # записываем заголовки
         for person in people.values():  # перебираем всех людей
@@ -276,7 +276,7 @@ def load_libraries():
 
 def save_libraries(libraries):
     # сохраняем список библиотек в CSV
-    with open("libraries.csv", "w", newline="", encoding="utf-8") as f:  # открываем файл для записи
+    with open("libraries.csv", "w", newline="", encoding="utf-8") as f:# открываем файл для записи
         writer = csv.DictWriter(f, fieldnames=["name"])  # задаём колонку name
         writer.writeheader()  # записываем заголовок
         for lib in libraries.values():  # перебираем библиотеки
